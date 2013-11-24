@@ -8,6 +8,7 @@ import(
 
 
 
+// Test that a bucket that is full does not block execution
 func Test_BucketBuffering(t *testing.T){
     // Create a bucket with capacity 3, that adds tokens every 4 seconds
     const RATE = 4 *time.Second
@@ -30,6 +31,7 @@ func Test_BucketBuffering(t *testing.T){
     }
 }
 
+// Test that a bucket that is empty blocks execution for the correct amount of time
 func Test_BucketCreation(t *testing.T){
     // Create a bucket with capacity 3, that adds tokens every 4 seconds
     const RATE = 4 *time.Second
@@ -47,7 +49,8 @@ func Test_BucketCreation(t *testing.T){
     <-b.SpendToken(1)
 
 
-    //Spending three times on an empty bucket should take 12 seconds
+    // Spending three times on an empty bucket should take 12 seconds
+    // (Take the average across three, due to imprecision/scheduling)
     before := time.Now()
     <-b.SpendToken(1)
     <-b.SpendToken(1)
