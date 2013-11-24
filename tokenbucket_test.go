@@ -6,6 +6,22 @@ import (
 	"time"
 )
 
+func Example_BucketUse() {
+	// Allow a new action every 5 seconds, with a maximum of 3 "in the bank"
+	bucket := tokenbucket.NewBucket(3, 5)
+
+	// To perform a regulated action, we must spend a token
+	// RegulatedAction will not be performed until the bucket contains enough tokens
+	<-bucket.SpendToken(1)
+	RegulatedAction()
+}
+
+// RegulatedAction represents some function that is rate-limited, monitored,
+// or otherwise regulated
+func RegulatedAction() {
+	// Some expensive action goes on here
+}
+
 // Test that a bucket that is full does not block execution
 func Test_BucketBuffering(t *testing.T) {
 	// Create a bucket with capacity 3, that adds tokens every 4 seconds
