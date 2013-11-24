@@ -8,7 +8,7 @@ import (
 
 func Example_BucketUse() {
 	// Allow a new action every 5 seconds, with a maximum of 3 "in the bank"
-	bucket := tokenbucket.NewBucket(3, 5)
+	bucket := tokenbucket.NewBucket(3, 5 * time.Second)
 
 	// To perform a regulated action, we must spend a token
 	// RegulatedAction will not be performed until the bucket contains enough tokens
