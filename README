@@ -41,6 +41,6 @@ Anytime a regulated action is performed, spend a token.
 `tokenbucket` is free software provided under version 3 of the LGPL license.
 
 
-Software that uses `tokenbucket` may be released under *any* license, as long as the source code for `tokenbucket` (including any modifications) are made available under the LGPLv3license.
+Software that uses `tokenbucket` may be released under *any* license, as long as the source code for `tokenbucket` (including any modifications) are made available under the LGPLv3 license.
 
 You do not need to release the rest of the software under the LGPL, or any free/open-source license, for that matter (though we would encourage you to do so!).
