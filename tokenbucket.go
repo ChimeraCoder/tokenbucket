@@ -69,3 +69,18 @@ func (b *Bucket) SpendToken(n int64) <-chan error {
 
 	return c
 }
+
+// Drain will empty all tokens in the bucket
+// If the tokens are being added too quickly (if the rate is too fast)
+// this will never drain
+func (b *Bucket) Drain() error{
+    // TODO replace this with a more solid approach (such as replacing the channel altogether)
+    for {
+        select {
+            _ <- b.tokens:
+                continue
+            default:
+                return
+        }
+    }
+}
