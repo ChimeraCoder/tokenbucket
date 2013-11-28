@@ -12,7 +12,7 @@ type Bucket struct {
 	rateMutex sync.Mutex
 }
 
-func NewBucket(capacity int64, rate time.Duration) *Bucket {
+func NewBucket(rate time.Duration, capacity int64) *Bucket {
 
 	//A bucket is simply a channel with a buffer representing the maximum size
 	tokens := make(chan struct{}, capacity)

@@ -8,7 +8,7 @@ import (
 
 func Example_BucketUse() {
 	// Allow a new action every 5 seconds, with a maximum of 3 "in the bank"
-	bucket := tokenbucket.NewBucket(3, 5 * time.Second)
+	bucket := tokenbucket.NewBucket(5*time.Second, 3)
 
 	// To perform a regulated action, we must spend a token
 	// RegulatedAction will not be performed until the bucket contains enough tokens
@@ -28,7 +28,7 @@ func Test_BucketBuffering(t *testing.T) {
 	const RATE = 4 * time.Second
 	const CAPACITY = 3
 	const ERROR = 500 * time.Millisecond
-	b := tokenbucket.NewBucket(CAPACITY, RATE)
+	b := tokenbucket.NewBucket(RATE, CAPACITY)
 
 	// Allow the bucket enough time to fill to capacity
 	time.Sleep(CAPACITY * RATE)
@@ -53,7 +53,7 @@ func Test_BucketCreation(t *testing.T) {
 	const ERROR = 500 * time.Millisecond
 	const EXPECTED_DURATION = RATE * CAPACITY
 
-	b := tokenbucket.NewBucket(CAPACITY, RATE)
+	b := tokenbucket.NewBucket(RATE, CAPACITY)
 
 	// Ensure that the bucket is empty
 	<-b.SpendToken(1)
