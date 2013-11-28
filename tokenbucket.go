@@ -77,10 +77,10 @@ func (b *Bucket) Drain() error{
     // TODO replace this with a more solid approach (such as replacing the channel altogether)
     for {
         select {
-            _ <- b.tokens:
+            case _ = <-b.tokens:
                 continue
             default:
-                return
+                return nil
         }
     }
 }
